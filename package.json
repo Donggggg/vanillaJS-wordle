@@ -1,0 +1,21 @@
+{
+  "name": "vanillajs-wordle",
+  "version": "1.0.0",
+  "description": "바닐라 자바스크립트로 만드는 wordle",
+  "type": "module",
+  "scripts": {
+    "start": "webpack serve --mode=development",
+    "build": "webpack --mode=development"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
