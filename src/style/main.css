@@ -60,6 +60,12 @@ header {
   font-weight: 900;
   color: white;
   box-sizing: border-box;
+  text-transform: uppercase;
+}
+
+.fill {
+  border: 2px solid grey;
+  color: black;
 }
 
 .empty {
