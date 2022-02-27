@@ -40,7 +40,13 @@ export default class Game {
     this.setResult(word);
   }
 
-  finish() {}
+  finish() {
+    if (this.state === CORRECT) {
+      alert("정답!");
+    } else if (this.state === FINISHED) {
+      alert(`기회가 모두 소진되었습니다. 정답은 ${this.answerWord}입니다.`);
+    }
+  }
 
   setResult(word) {
     if (MAX_CHANCE_NUM <= this.current + 1) {
@@ -48,8 +54,9 @@ export default class Game {
       this.finish();
     }
 
-    this.inputs[this.current].setResult(compareWord(word, this.answerWord));
-
+    const result = compareWord(word, this.answerWord);
+    this.dashboard.setResult(result, word);
+    this.inputs[this.current].setResult(result);
     this.inputs.push(new Input(++this.current, this.validateAnswer.bind(this)));
   }
 }
