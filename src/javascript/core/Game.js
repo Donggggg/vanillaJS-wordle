@@ -7,6 +7,7 @@ import {
 import DashBoard from "./DashBoard.js";
 import Input from "./Input.js";
 import { compareWord } from "../helpers/gameHelper.js";
+import Keyboard from "./Keyboard.js";
 
 export default class Game {
   constructor() {
@@ -20,6 +21,7 @@ export default class Game {
     this.current = 0;
     this.chanceCount = MAX_CHANCE_NUM;
     this.dashboard = new DashBoard();
+    this.keyboard = new Keyboard(this.handleKeyDown.bind(this));
     this.inputs = [new Input(this.current, this.validateAnswer.bind(this))];
   }
 
