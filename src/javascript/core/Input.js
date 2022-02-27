@@ -1,10 +1,11 @@
-import { MAX_TILE_NUM, ONGOING } from "../constants/const.js";
+import { FINISHED, MAX_TILE_NUM, ONGOING } from "../constants/const.js";
 import { $$ } from "../helpers/domHelper.js";
 import { isAlpha } from "../helpers/stringHelper.js";
 
 export default class Input {
-  constructor(index) {
+  constructor(index, validate) {
     this.init(index);
+    this.validate = validate;
   }
 
   init(index) {
@@ -16,14 +17,10 @@ export default class Input {
   }
 
   handleKeyDown(key) {
-    if (key === "Backspace") {
-      this.removeTile();
-      return;
-    }
-
-    if (MAX_TILE_NUM <= this.current || !isAlpha(key)) return;
-
-    this.setTile(key);
+    if (key === "Backspace") this.removeTile();
+    else if (key === "Enter" && this.current === MAX_TILE_NUM)
+      this.validate(this.alphas.join(""));
+    else if (this.current < MAX_TILE_NUM && isAlpha(key)) this.setTile(key);
   }
 
   setTile(key) {
@@ -41,5 +38,13 @@ export default class Input {
     this.alphas[removeIndex] = " ";
     this.tiles[removeIndex].innerText = " ";
     this.current = removeIndex;
+  }
+
+  setResult(result) {
+    this.state = FINISHED;
+    result.forEach((state, idx) => {
+      this.tiles[idx].classList.remove("fill");
+      this.tiles[idx].classList.add(state);
+    });
   }
 }
