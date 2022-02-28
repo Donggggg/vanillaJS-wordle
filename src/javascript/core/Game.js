@@ -6,7 +6,11 @@ import {
 } from "../constants/const.js";
 import DashBoard from "./DashBoard.js";
 import Input from "./Input.js";
-import { compareWord } from "../helpers/gameHelper.js";
+import {
+  compareWord,
+  generateWord,
+  validateWord,
+} from "../helpers/gameHelper.js";
 import Keyboard from "./Keyboard.js";
 
 export default class Game {
@@ -17,9 +21,8 @@ export default class Game {
 
   init() {
     this.state = ONGOING;
-    this.answerWord = "world";
     this.current = 0;
-    this.chanceCount = MAX_CHANCE_NUM;
+    this.answerWord = generateWord();
     this.dashboard = new DashBoard();
     this.keyboard = new Keyboard(this.handleKeyDown.bind(this));
     this.inputs = [new Input(this.current, this.validateAnswer.bind(this))];
@@ -35,6 +38,11 @@ export default class Game {
   }
 
   validateAnswer(word) {
+    if (!validateWord(word)) {
+      alert(`${word}는 정상적인 단어가 아닙니다.`);
+      return;
+    }
+
     if (word === this.answerWord) {
       this.state = CORRECT;
       this.finish();
@@ -51,7 +59,7 @@ export default class Game {
   }
 
   setResult(word) {
-    if (MAX_CHANCE_NUM <= this.current + 1) {
+    if (MAX_CHANCE_NUM <= this.current + 1 && this.state === ONGOING) {
       this.state = FINISHED;
       this.finish();
     }
