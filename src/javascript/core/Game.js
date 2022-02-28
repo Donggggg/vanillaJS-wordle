@@ -38,8 +38,7 @@ export default class Game {
     if (word === this.answerWord) {
       this.state = CORRECT;
       this.finish();
-    }
-    this.setResult(word);
+    } else this.setResult(word);
   }
 
   finish() {
