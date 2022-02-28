@@ -5,7 +5,7 @@ export const generateWord = () =>
   words[Math.floor(Math.random() * words.length)];
 
 export const validateWord = (word) => {
-  const vowels = ["a", "e", "i", "o", "u"];
+  const vowels = ["a", "e", "i", "o", "u", "y"];
   const characters = word.split("");
   let consonantCount = 0;
 
