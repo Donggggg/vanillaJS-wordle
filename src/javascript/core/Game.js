@@ -6,7 +6,11 @@ import {
 } from "../constants/const.js";
 import DashBoard from "./DashBoard.js";
 import Input from "./Input.js";
-import { compareWord, generateWord } from "../helpers/gameHelper.js";
+import {
+  compareWord,
+  generateWord,
+  validateWord,
+} from "../helpers/gameHelper.js";
 import Keyboard from "./Keyboard.js";
 
 export default class Game {
@@ -34,6 +38,11 @@ export default class Game {
   }
 
   validateAnswer(word) {
+    if (!validateWord(word)) {
+      alert(`${word}는 정상적인 단어가 아닙니다.`);
+      return;
+    }
+
     if (word === this.answerWord) {
       this.state = CORRECT;
       this.finish();
